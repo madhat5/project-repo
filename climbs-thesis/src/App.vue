@@ -1,0 +1,207 @@
+<template>
+  <div id="app">
+    <div class="section thesis-title">
+      <h1>What is strength in climbing?</h1>
+      <div class="line"></div>
+      <h2>Are climbers getting stronger or are there more strong climbers?</h2>
+    </div>
+    <div class="section section-0 intro">
+      <h3>Introduction</h3>
+      <p>As I’ve delved into climbing, both in practice and research, one thing has quickly become apparent: the continuous effort and never-ending endeavour to get stronger. As I began to look into this further, and developed questions about climbing benchmarks around the world, as well as the rate of strength increase of climbers, I focused my research on two questions: have we as climbers gotten stronger over time, or are there more strong climbers (or both)? Our treatment for this thesis will attempt to answer these questions by understanding what strength is in climbing. We will focus on bouldering and sport/lead climbing. It should be noted that there are other types of climbing, including: top-rope; ice-climbing; mountaineering and trad climbing; free solo and deep water solo. We will analyze several aspects of climbing, including what the records and benchmarks are for climbing routes, what the various grading systems are (how climbs are measured); what makes a climb hard; how climbers get stronger; and other aspects such as the increase in popularity of the sport over time, and accompanying research and literature. As we work on answering the aforementioned questions, we will work to expand the reader’s climbing knowledge and vocabulary throughout this essay.</p>
+    </div>
+    <div class="section section-1">
+      <h3>Climbing Holds</h3>
+      <div class="viz">
+        <Holds
+          v-for="hold in holdsData"
+          :key="hold.id"
+          :name="hold.name"
+          :description="hold.description"
+          :imagePath="hold.imagePath"
+          :overlayImg="hold.overlayImg"
+        />
+      </div>
+    </div>
+    <div class="section section-2">
+      <h3>Climbing Grades</h3>
+    
+      <div class="grades-copy">
+        <p>Before we dive into specific grades, let’s walk through some of the main grading systems: the V scale, YDS scale, Font scale, and French scale. Keep in mind at the end of the day, grading systems are both variable and subjective in their attempts to quantify difficulty. Free climbing grades are generally understood to reflect the hardest move or section on a particular route. - they do not indicate time commitment or duration.</p>
+        
+        <p>
+        <b>V scale</b>
+        <br/>
+        Specific to bouldering, the V scale, also known as the Hueco scale, was developed by John 'Vermin' Sherman; he based this system off of another/simpler system - John Gill’s B-system for bouldering. In this V scale, V0 moves are the equivalent of 5.10 climbing moves (part of the YDS scale, which we’ll see further down). The Vscale is open ended, with the simplest/easiest moves starting at V0 and the current hardest boulder problem is V17.
+        </p>
+
+        <p>
+        <b>Font/Fontainebleau</b>
+        <br/>
+        Specific to bouldering, the Fontainebleau grading system has been around much longer than the Hueco system. This scale’s grades follow a similar rating system to French free-climb ratings (which we’ll see further down).The scale includes a numerical grade ascending with difficulty; starting at level 6, letters are appended to the numbers starting (format: 7C). To differentiate the Font scale from its similar French free-climbing scale, letters are capitalized in the Font system. 
+        </p>
+      </div>
+      <Grades/>
+    </div>
+    <div class="section section-3">
+      <h3>Comparing Boulder Problems</h3>
+      <p>lorem ipsum re: what i'm doing here. Comparison of 2 problems, at different levels. As we'll see, similar movements. [...] If that's the case, we can assume then that strength lies in a climber's ability to maintain position on the wall, and move/progress along the route. These are the constants, the variables being climbing angles, hold types combinations/sizes, and wall type/ rock type, route length.</p> 
+      <p><strong>Blair Witch</strong> (6B+/V4), Ice Pond || <strong>La Toupie Carnivore</strong> assis (8B+/V14) - Jimmy Webb</p>
+      <Problems/>
+    </div>
+    <div class="section section-4">
+      <h3>The Numbers</h3>
+      <Chart/>
+      <!-- <Chart :data="yearsData"/> -->
+      <!-- <BarChart
+       xKey="year"
+       yKey="climbs" 
+      :data="yearsData"/> -->
+    </div>
+    <div class="section conclusion">
+      <h3>The End</h3>
+      <p>Conclusion lorem ipsum</p>
+    </div>
+    <div class="section reference">
+      <p>References? (in treatment only?) lorem ipsum</p>
+    </div>
+  </div>
+</template>
+
+<script>
+import Holds from './components/Holds.vue'
+import Grades from './components/Grades.vue'
+import Chart from './components/Chart.vue'
+import Problems from './components/Problems.vue'
+// import BarChart from './components/BarChart.vue'
+
+import holdsJson from "../public/holdsData.json"
+// import yearsJson from "../public/yearlyClimbData.json"
+
+export default {
+  name: 'App',
+  // created() {
+  //   fetch('../public/holdsData.json')
+  //     .then(response => response.json())
+  //     .then(
+  //       // this.holds_data = data
+  //       holdsData => console.log(holdsData)
+  //     );
+  // },
+  components: {
+    Holds,
+    Grades,
+    Problems,
+    Chart,
+    // BarChart
+  },
+  data() {
+    return {
+      holdsData: holdsJson,
+      // yearsData: yearsJson,
+    }
+  }
+}
+</script>
+
+<style>
+body {
+  margin: 0;
+}
+
+#app {
+  font-family: Helvetica Neue,Helvetica,Arial,sans-serif; 
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #2c3e50;
+  margin: 60px auto 0;
+  /* max-width: 1200px; */
+  width: 100%;
+  font-size: 16px;
+  line-height: 1.7em;
+}
+
+p {
+  font-size: 1.1em;
+}
+
+h2 {
+  font-size: 1.6em;
+}
+
+h3 {
+  font-family: Didot,Didot LT STD,Hoefler Text,Garamond,Times New Roman,serif;
+  font-size: 1.9em;
+}
+
+.section {
+  margin: 0 auto;
+  margin-bottom: 1em;
+  padding: 1em 11em;
+}
+
+.section-1, .section-3 {
+    background-color: #ddd;
+    padding: 2em 11em 4em;
+}
+
+.thesis-title {
+  margin: 0 auto;
+  /* width: 80%; */
+  height: 720px;
+}
+
+.thesis-title h1 {
+  font-family: Didot,Didot LT STD,Hoefler Text,Garamond,Times New Roman,serif;
+  font-size: 3.3em;
+  text-align: center;
+  padding-top: 23%;
+}
+
+.thesis-title .line {
+  width: 80%;
+  height: 47px;
+  border-bottom: 1px solid black;
+  margin: 0 auto;
+}
+
+.thesis-title h2 {
+  text-align: center;
+}
+
+.viz {
+  display: grid;
+  grid-template-rows: repeat(4, 1fr);
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.section .section-1 .viz {
+  text-align: center;
+}
+
+.center {
+  margin: 0 auto;
+}
+
+/* .section-2 {
+  margin-bottom: 8em;
+} */
+
+/* .grades-copy {
+  margin-bottom: 10em;
+} */
+
+#scrollama-container-flexed {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+#scrollama-container-flexed .scrollama-graphic {
+    flex: 1;
+    height: 80vh;
+    top: 10vh;
+}
+
+#scrollama-container-flexed .scrollama-steps {
+    flex: 1;
+}
+</style>
